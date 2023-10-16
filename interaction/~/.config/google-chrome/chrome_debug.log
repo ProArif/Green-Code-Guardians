@@ -1,0 +1,14 @@
+[82534:82534:1015/201854.519654:WARNING:chrome_main_delegate.cc(613)] This is Chrome version 118.0.5993.70 (not a warning)
+[82534:82534:1015/201854.650561:WARNING:policy_logger.cc(148)] :components/enterprise/browser/controller/chrome_browser_cloud_management_controller.cc(88) Could not create policy manager as CBCM is not enabled.
+[82534:82534:1015/201855.134478:ERROR:policy_logger.cc(154)] :components/enterprise/browser/controller/chrome_browser_cloud_management_controller.cc(163) Cloud management controller initialization aborted as CBCM is not enabled.
+[82534:82534:1015/201855.514037:WARNING:bluez_dbus_manager.cc(247)] Floss manager not present, cannot set Floss enable/disable.
+[82571:82571:1015/201855.697040:WARNING:sandbox_linux.cc(393)] InitializeSandbox() called with multiple threads in process gpu-process.
+[82534:82534:1015/201905.374547:WARNING:controller_impl.cc(1188)] Background download complete, client: 6, completion type: 0, file size:5085
+[82534:82534:1015/201905.421736:WARNING:controller_impl.cc(1188)] Background download complete, client: 6, completion type: 0, file size:265059
+[82534:82534:1015/201905.790784:WARNING:controller_impl.cc(1188)] Background download complete, client: 6, completion type: 0, file size:2222106
+[82534:82534:1015/201906.310916:WARNING:controller_impl.cc(1188)] Background download complete, client: 6, completion type: 0, file size:45103
+[82534:82534:1015/201906.680382:WARNING:controller_impl.cc(1188)] Background download complete, client: 6, completion type: 0, file size:883094
+[82534:82534:1015/201906.991872:WARNING:controller_impl.cc(1188)] Background download complete, client: 6, completion type: 0, file size:4068198
+[82572:82585:1015/201907.042175:WARNING:sqlite_persistent_store_backend_base.cc(198)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:246 to client_task_runner_.
+[82572:82585:1015/201907.042385:WARNING:sqlite_persistent_store_backend_base.cc(198)] Failed to post task from FlushAndNotifyInBackground@net/extras/sqlite/sqlite_persistent_store_backend_base.cc:246 to client_task_runner_.
+[82534:82534:1015/201907.103587:WARNING:pref_notifier_impl.cc(41)] Pref observer for media_router.cast_allow_all_ips found at shutdown.
