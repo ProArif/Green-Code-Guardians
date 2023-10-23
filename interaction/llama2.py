@@ -10,12 +10,12 @@ prompt_box = driver.find_element(by = By.NAME, value = "prompt")
 
 #send prompt 
 prompts = []
-with open('generation.txt') as g:
+with open('../input/generation.txt') as g:
     prompts = g.readlines()
 
 for prompt in prompts:
     print(prompt)
     prompt_box.send_keys(prompt + Keys.RETURN)
-    time.sleep(10) # 10 seconds per prompt
+    time.sleep(20) # 20 seconds per prompt
 
 driver.quit()
