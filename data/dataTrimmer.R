@@ -8,6 +8,7 @@ library(jsonlite)
 
 # Create a list of file paths to JSON files
 file_paths <- c(
+  # data from macOS M2
   "chatgpt/m2-generation-chatGPT.json",
   "chatgpt/m2-knowledge-chatGPT.json",
   "chatgpt/m2-realWorld-chatGPT.json",
@@ -16,7 +17,24 @@ file_paths <- c(
   "bard/m2-realWorld-bard.json",
   "llama/m2-generation-llama2.json",
   "llama/m2-knowledge-llama2.json",
-  "llama/m2-realworld-llama2.json"
+  "llama/m2-realworld-llama2.json",
+
+# data from linux
+  "chatgpt/linux-generation-chatgpt.json",
+  "chatgpt/linux-knowledge-chatgpt.json",
+  "chatgpt/linux-real-chatgpt.json",
+  "bard/linux-generation-bard.json",
+  "bard/linux-knowledge-bard.json",
+  "bard/linux-real-bard.json",
+  "llama/linux-generation-llama2-1.json",
+  "llama/linux-generation-llama2-2.json",
+  "llama/linux-generation-llama2-3.json",
+  "llama/linux-knowledge-llama2-1.json",
+  "llama/linux-knowledge-llama2-2.json",
+  "llama/linux-knowledge-llama2-3.json",
+  "llama/linux-real-llama2-1.json",
+  "llama/linux-real-llama2-2.json",
+  "llama/linux-real-llama2-3.json"
 )
 
 # function to format and save the counter data as RData
@@ -34,7 +52,7 @@ format_and_save_rdata <- function(file_path) {
   save(counter_data, file = output_rdata_file)
   
   # Print a message indicating the processing is done
-  cat("Formatted and saved counter data from", file_path, "as", output_rdata_file, "\n")
+  cat("Formatted and saved counter data", file_path, "as", output_rdata_file, "\n")
 }
 
 # Loop through the list of file paths and format/save counter data as RData
