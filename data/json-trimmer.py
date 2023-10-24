@@ -44,7 +44,7 @@ def format_data(data):
     }
 
 # change machine and llm
-machine = 'm1'
+machine = 'm2'
 llm = ['bard','chatgpt','llama']
 tasks = ['generation','knowledge','realworld']
 
