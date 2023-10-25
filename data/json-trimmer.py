@@ -45,7 +45,7 @@ def format_data(data):
 
 # change machine and llm
 machine = 'm2'
-llm = ['bard','chatgpt','llama']
+llm = ['llama']
 tasks = ['generation','knowledge','realworld']
 
 for l in llm:

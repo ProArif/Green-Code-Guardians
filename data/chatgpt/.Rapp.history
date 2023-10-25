@@ -1,0 +1,6 @@
+load("/Users/asror_akb/VU/Master/GL/Green-Code-Guardians/data/chatgpt/m1_generation_chatgpt.Rdata")
+ls
+clear
+clean
+view('m1_generation_chatgpt.Rdata')
+load("/Users/asror_akb/VU/Master/GL/Green-Code-Guardians/data/chatgpt/m1_generation_chatgpt.Rdata")
