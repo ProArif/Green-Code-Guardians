@@ -8,33 +8,15 @@ library(jsonlite)
 
 # Create a list of file paths to JSON files
 file_paths <- c(
-  # data from macOS M2
-  "chatgpt/m2-generation-chatGPT.json",
-  "chatgpt/m2-knowledge-chatGPT.json",
-  "chatgpt/m2-realWorld-chatGPT.json",
-  "bard/m2-generation-bard.json",
-  "bard/m2-knowledge-bard.json",
-  "bard/m2-realWorld-bard.json",
-  "llama/m2-generation-llama2.json",
-  "llama/m2-knowledge-llama2.json",
-  "llama/m2-realworld-llama2.json",
-
-# data from linux
-  "chatgpt/linux-generation-chatgpt.json",
-  "chatgpt/linux-knowledge-chatgpt.json",
-  "chatgpt/linux-real-chatgpt.json",
-  "bard/linux-generation-bard.json",
-  "bard/linux-knowledge-bard.json",
-  "bard/linux-real-bard.json",
-  "llama/linux-generation-llama.json",
-  "llama/linux-knowledge-llama.json",
-  "llama/linux-real-llama.json"
+  "linux-generation-llama.json",
+  "linux-knowledge-llama.json",
+  "linux-real-llama.json"
 )
 
 # function to format and save the counter data as RData
 format_and_save_rdata <- function(file_path) {
   # Load JSON data from the file
-  data <- fromJSON(file_path)
+  data <- fromJSON(file_path, warn = F)
   
   # Access the 'counters' element
   counter_data <- data[["counters"]]
