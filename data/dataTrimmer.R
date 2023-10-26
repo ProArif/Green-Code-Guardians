@@ -26,15 +26,9 @@ file_paths <- c(
   "bard/linux-generation-bard.json",
   "bard/linux-knowledge-bard.json",
   "bard/linux-real-bard.json",
-  "llama/linux-generation-llama2-1.json",
-  "llama/linux-generation-llama2-2.json",
-  "llama/linux-generation-llama2-3.json",
-  "llama/linux-knowledge-llama2-1.json",
-  "llama/linux-knowledge-llama2-2.json",
-  "llama/linux-knowledge-llama2-3.json",
-  "llama/linux-real-llama2-1.json",
-  "llama/linux-real-llama2-2.json",
-  "llama/linux-real-llama2-3.json"
+  "llama/linux-real-llama.json",
+  "llama/linux-generation-llama.json",
+  "llama/linux-knowledge-llama.json"
 )
 
 # function to format and save the counter data as RData
