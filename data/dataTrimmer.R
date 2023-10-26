@@ -28,7 +28,18 @@ file_paths <- c(
   "bard/linux-real-bard.json",
   "llama/linux-real-llama.json",
   "llama/linux-generation-llama.json",
-  "llama/linux-knowledge-llama.json"
+  "llama/linux-knowledge-llama.json",
+
+ # data from windows
+  "chatgpt/windows11-generation-chatgpt.json",
+  "chatgpt/windows11-knowledge-chatgpt.json",
+  "chatgpt/windows11-real-chatgpt.json",
+  "bard/windows11-generation-bard.json",
+  "bard/windows11-knowledge-bard.json",
+  "bard/windows11-real-bard.json",
+  "llama/windows11-real-llama.json",
+  "llama/windows11-generation-llama.json",
+  "llama/windows11-knowledge-llama.json" 
 )
 
 # function to format and save the counter data as RData
