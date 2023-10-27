@@ -121,7 +121,7 @@ boxplot(list(df_linux_generation_chatgpt$power,
         )
 # TODO: Linux has a admin right problem about saving image through png()
 # save the image as png
-png("../figures/linux-generation-boxplot.jpeg")
+png("figures/linux-generation-boxplot.jpeg")
 
 # Linux-Knowledge
 boxplot(list(df_linux_knowledge_chatgpt$power, 
@@ -130,7 +130,7 @@ boxplot(list(df_linux_knowledge_chatgpt$power,
         main="Linux-Knowledge", names=c("ChatGPT", "Bard", "Llama2"),
         ylab="Power")
 # Save image
-png("../figures/linux-knowledge-boxplot.jpeg")
+png("figures/linux-knowledge-boxplot.jpeg")
 
 # Linux-Real
 boxplot(list(df_linux_real_chatgpt$power, 
@@ -139,7 +139,7 @@ boxplot(list(df_linux_real_chatgpt$power,
         main="Linux-Real", names=c("ChatGPT", "Bard", "Llama2"),
         ylab="Power")
 # Save image
-png("../figures/linux-real-boxplot.jpeg")
+png("figures/linux-real-boxplot.jpeg")
 
 # M2-Generation
 boxplot(list(df_m2_generation_chatgpt$power, 
@@ -147,7 +147,7 @@ boxplot(list(df_m2_generation_chatgpt$power,
              df_m2_generation_llama$power), 
         main="M2-Generation", names=c("ChatGPT", "Bard", "Llama2"),
         ylab="Power")
-png("../figures/linux-real-boxplot.jpeg")
+png("figures/m2-generation-boxplot.jpeg")
 
 # M2-Knowledge
 boxplot(list(df_m2_knowledge_chatgpt$power, 
@@ -155,6 +155,7 @@ boxplot(list(df_m2_knowledge_chatgpt$power,
              df_m2_knowledge_llama$power), 
         main="M2-Knowledge", names=c("ChatGPT", "Bard", "Llama2"),
         ylab="Power")
+png("figures/m2-knowledge-boxplot.jpeg")
 
 # M2-Real
 boxplot(list(df_m2_real_chatgpt$power, 
@@ -162,6 +163,7 @@ boxplot(list(df_m2_real_chatgpt$power,
              df_m2_real_llama$power), 
         main="M2-Real", names=c("ChatGPT", "Bard", "Llama2"),
         ylab="Power")
+png("figures/m2-real-boxplot.jpeg")
 
 # Windows-Generation
 boxplot(list(df_windows_generation_chatgpt$power, 
@@ -169,6 +171,7 @@ boxplot(list(df_windows_generation_chatgpt$power,
              df_windows_generation_llama$power), 
         main="Windows-Generation", names=c("ChatGPT", "Bard", "Llama2"),
         ylab="Power")
+png("figures/windows-generation-boxplot.jpeg")
 
 # Windows-Knowledge
 boxplot(list(df_windows_knowledge_chatgpt$power, 
@@ -176,6 +179,7 @@ boxplot(list(df_windows_knowledge_chatgpt$power,
              df_windows_knowledge_llama$power), 
         main="Windows-Knowledge", names=c("ChatGPT", "Bard", "Llama2"),
         ylab="Power")
+png("figures/windows-knowledge-boxplot.jpeg")
 
 # Windows-Real
 boxplot(list(df_windows_real_chatgpt$power, 
@@ -183,10 +187,14 @@ boxplot(list(df_windows_real_chatgpt$power,
              df_windows_real_llama$power), 
         main="Windows-Real", names=c("ChatGPT", "Bard", "Llama2"),
         ylab="Power")
+png("figures/windows-real-boxplot.jpeg")
+
 
 
 # Violin plot of interesting 
-ggplot(df_linux_generation_llama, aes(x = "Linux Generation", y = power)) +
+ggplot(list(df_windows_real_chatgpt$power, 
+            df_windows_real_bard$power,
+            df_windows_real_llama$power), aes(x = "Linux Generation", y = power)) +
   geom_violin() +
   ylab("Power") +
   xlab("Linux")
