@@ -64,15 +64,15 @@ hist(df_linux_generation_chatgpt$power, main="Histogram of Power Usage", xlab="P
 boxplot(df_linux_generation_chatgpt$power)
 
 # Function removes outlier by IQR rule
-remove_outliers <- function(df, column_name) {
-  q1 <- quantile(df[[column_name]], 0.25)
-  q3 <- quantile(df[[column_name]], 0.75)
+remove_outliers <- function(df) {
+  q1 <- quantile(df[['power']], 0.25)
+  q3 <- quantile(df[['power']], 0.75)
   iqr <- q3 - q1
   
   lower_threshold <- q1 - 1.5 * iqr
   upper_threshold <- q3 + 1.5 * iqr
   
-  df_filtered <- df[df[[column_name]] >= lower_threshold & df[[column_name]] <= upper_threshold, ]
+  df_filtered <- df[df[['power']] >= lower_threshold & df[['power']] <= upper_threshold, ]
   return(df_filtered)
 }
 
@@ -85,6 +85,25 @@ df_linux_real_bard <- remove_outliers(df_linux_real_bard)
 df_linux_generation_llama <- remove_outliers(df_linux_generation_llama)
 df_linux_knowledge_llama <- remove_outliers(df_linux_knowledge_llama)
 df_linux_real_llama <- remove_outliers(df_linux_real_llama)
+df_m2_gneration_chatgpt <- remove_outliers(df_m2_generation_chatgpt)
+df_m2_knowledge_chatgpt <- remove_outliers(df_m2_knowledge_chatgpt)
+df_m2_real_chatgpt <- remove_outliers(df_m2_real_chatgpt)
+df_m2_generation_bard <- remove_outliers(df_m2_generation_bard)
+df_m2_knowledge_bard <- remove_outliers(df_m2_knowledge_bard)
+df_m2_real_bard <- remove_outliers(df_m2_real_bard)
+df_m2_generation_llama <- remove_outliers(df_m2_generation_llama)
+df_m2_knowledge_llama <- remove_outliers(df_m2_knowledge_llama)
+df_m2_real_llama <- remove_outliers(df_m2_real_llama)
+df_windows_gneration_chatgpt <- remove_outliers(df_windows_generation_chatgpt)
+df_windows_knowledge_chatgpt <- remove_outliers(df_windows_knowledge_chatgpt)
+df_windows_real_chatgpt <- remove_outliers(df_windows_real_chatgpt)
+df_windows_generation_bard <- remove_outliers(df_windows_generation_bard)
+df_windows_knowledge_bard <- remove_outliers(df_windows_knowledge_bard)
+df_windows_real_bard <- remove_outliers(df_windows_real_bard)
+df_windows_generation_llama <- remove_outliers(df_windows_generation_llama)
+df_windows_knowledge_llama <- remove_outliers(df_windows_knowledge_llama)
+df_windows_real_llama <- remove_outliers(df_windows_real_llama)
+
 
 hist(df_linux_generation_chatgpt$power, main="Histogram of Power Usage", xlab="Power Usage", ylab="Frequency", col="skyblue", border="black")
 boxplot(df_linux_generation_chatgpt$power)
@@ -93,14 +112,84 @@ boxplot(df_linux_generation_chatgpt$power)
 qqnorm(df_linux_generation_chatgpt$power)
 qqline(df_linux_generation_chatgpt$power, col = "red")
 
-# Violin plot
-ggplot(df_linux_generation_chatgpt, aes(x = "ChatGPT Generation", y = power)) +
+# Boxplot: Linux-Generation
+boxplot(list(df_linux_generation_chatgpt$power, 
+            df_linux_generation_bard$power,
+            df_linux_generation_llama$power), 
+        main="Linux-Generation", names=c("ChatGPT", "Bard", "Llama2"),
+        ylab="Power"
+        )
+# TODO: Linux has a admin right problem about saving image through png()
+# save the image as png
+png("../figures/linux-generation-boxplot.jpeg")
+
+# Linux-Knowledge
+boxplot(list(df_linux_knowledge_chatgpt$power, 
+             df_linux_knowledge_bard$power,
+             df_linux_knowledge_llama$power), 
+        main="Linux-Knowledge", names=c("ChatGPT", "Bard", "Llama2"),
+        ylab="Power")
+# Save image
+png("../figures/linux-knowledge-boxplot.jpeg")
+
+# Linux-Real
+boxplot(list(df_linux_real_chatgpt$power, 
+             df_linux_real_bard$power,
+             df_linux_real_llama$power), 
+        main="Linux-Real", names=c("ChatGPT", "Bard", "Llama2"),
+        ylab="Power")
+# Save image
+png("../figures/linux-real-boxplot.jpeg")
+
+# M2-Generation
+boxplot(list(df_m2_generation_chatgpt$power, 
+             df_m2_generation_bard$power,
+             df_m2_generation_llama$power), 
+        main="M2-Generation", names=c("ChatGPT", "Bard", "Llama2"),
+        ylab="Power")
+png("../figures/linux-real-boxplot.jpeg")
+
+# M2-Knowledge
+boxplot(list(df_m2_knowledge_chatgpt$power, 
+             df_m2_knowledge_bard$power,
+             df_m2_knowledge_llama$power), 
+        main="M2-Knowledge", names=c("ChatGPT", "Bard", "Llama2"),
+        ylab="Power")
+
+# M2-Real
+boxplot(list(df_m2_real_chatgpt$power, 
+             df_m2_real_bard$power,
+             df_m2_real_llama$power), 
+        main="M2-Real", names=c("ChatGPT", "Bard", "Llama2"),
+        ylab="Power")
+
+# Windows-Generation
+boxplot(list(df_windows_generation_chatgpt$power, 
+             df_windows_generation_bard$power,
+             df_windows_generation_llama$power), 
+        main="Windows-Generation", names=c("ChatGPT", "Bard", "Llama2"),
+        ylab="Power")
+
+# Windows-Knowledge
+boxplot(list(df_windows_knowledge_chatgpt$power, 
+             df_windows_knowledge_bard$power,
+             df_windows_knowledge_llama$power), 
+        main="Windows-Knowledge", names=c("ChatGPT", "Bard", "Llama2"),
+        ylab="Power")
+
+# Windows-Real
+boxplot(list(df_windows_real_chatgpt$power, 
+             df_windows_real_bard$power,
+             df_windows_real_llama$power), 
+        main="Windows-Real", names=c("ChatGPT", "Bard", "Llama2"),
+        ylab="Power")
+
+
+# Violin plot of interesting 
+ggplot(df_linux_generation_llama, aes(x = "Linux Generation", y = power)) +
   geom_violin() +
   ylab("Power") +
   xlab("Linux")
-
-
-
 
 
 # Scatterplot
