@@ -26,15 +26,26 @@ file_paths <- c(
   "bard/linux-generation-bard.json",
   "bard/linux-knowledge-bard.json",
   "bard/linux-real-bard.json",
-  "llama/linux-generation-llama2-1.json",
-  "llama/linux-generation-llama2-2.json",
-  "llama/linux-generation-llama2-3.json",
-  "llama/linux-knowledge-llama2-1.json",
-  "llama/linux-knowledge-llama2-2.json",
-  "llama/linux-knowledge-llama2-3.json",
-  "llama/linux-real-llama2-1.json",
-  "llama/linux-real-llama2-2.json",
-  "llama/linux-real-llama2-3.json"
+<<<<<<< HEAD
+  "llama/linux-generation-llama.json",
+  "llama/linux-knowledge-llama.json",
+  "llama/linux-real-llama.json"
+=======
+  "llama/linux-real-llama.json",
+  "llama/linux-generation-llama.json",
+  "llama/linux-knowledge-llama.json",
+
+ # data from windows
+  "chatgpt/windows11-generation-chatgpt.json",
+  "chatgpt/windows11-knowledge-chatgpt.json",
+  "chatgpt/windows11-real-chatgpt.json",
+  "bard/windows11-generation-bard.json",
+  "bard/windows11-knowledge-bard.json",
+  "bard/windows11-real-bard.json",
+  "llama/windows11-real-llama.json",
+  "llama/windows11-generation-llama.json",
+  "llama/windows11-knowledge-llama.json" 
+>>>>>>> 7351368c30da0f4e44ec0647cbe55906908633db
 )
 
 # function to format and save the counter data as RData

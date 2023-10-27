@@ -58,11 +58,16 @@ for (x in 1:3) {
 hist(log_df)
 shapiro.test(log_df)
 
+##### m1 chatgpt realworld ######
+
+m1_realworld_chatgpt_data <- fromJSON("chatgpt/m1-realworld-chatgpt-formated.json")
+m1_realworld_chatgpt_df <- as.data.frame(m1_realworld_chatgpt_data) 
+save(m1_realworld_chatgpt_df, file = 'chatgpt/m1_realworld_chatgpt.Rdata')
+
 ##### m1 llama knowledge ######
 
 m1_knowledge_llama_data <- fromJSON("llama/m1-knowledge-llama-formated.json")
 m1_knowledge_llama_df <- as.data.frame(m1_knowledge_llama_data) 
-
 save(m1_knowledge_llama_df, file = 'llama/m1_knowledge_llama.Rdata')
 
 plot.ts(m1_knowledge_llama_df)
@@ -81,3 +86,31 @@ for (x in 1:3) {
 }
 hist(log_df)
 shapiro.test(log_df)
+
+##### m1 llama generation ######
+m1_generation_llama_data <- fromJSON("llama/m1-generation-llama-formated.json")
+m1_generation_llama_df <- as.data.frame(m1_generation_llama_data) 
+save(m1_generation_llama_df, file = 'llama/m1_generation_llama.Rdata')
+
+##### m1 llama realworld ######
+m1_realworld_llama_data <- fromJSON("llama/m1-realworld-llama-formated.json")
+m1_realworld_llama_df <- as.data.frame(m1_realworld_llama_data) 
+save(m1_realworld_llama_df, file = 'llama/m1_realworld_llama.Rdata')
+
+
+
+##### m1 bard knowledge ######
+
+m1_knowledge_bard_data <- fromJSON("bard/m1-knowledge-bard-formated.json")
+m1_knowledge_bard_df <- as.data.frame(m1_knowledge_bard_data) 
+save(m1_knowledge_bard_df, file = 'bard/m1_knowledge_bard.Rdata')
+
+##### m1 llama generation ######
+m1_generation_bard_data <- fromJSON("bard/m1-generation-bard-formated.json")
+m1_generation_bard_df <- as.data.frame(m1_generation_bard_data) 
+save(m1_generation_bard_df, file = 'bard/m1_generation_bard.Rdata')
+
+##### m1 llama realworld ######
+m1_realworld_bard_data <- fromJSON("bard/m1-realworld-bard-formated.json")
+m1_realworld_bard_df <- as.data.frame(m1_realworld_bard_data) 
+save(m1_realworld_bard_df, file = 'bard/m1_realworld_bard.Rdata')
