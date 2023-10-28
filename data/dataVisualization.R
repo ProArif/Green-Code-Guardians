@@ -1,8 +1,22 @@
-install.packages("tidyverse")
-install.packages("ggplot2")
+# Install the required packages (if not already installed)
+if (!requireNamespace("tidyverse", quietly = TRUE)) {
+  install.packages("tidyverse")
+}
 
+if (!requireNamespace("ggplot2", quietly = TRUE)) {
+  install.packages("ggplot2")
+}
+
+if (!requireNamespace("dplyr", quietly = TRUE)) {
+  install.packages("dplyr")
+}
+
+# Load the necessary libraries
 library(tidyverse)
+library(dplyr)
 library(ggplot2)
+#library(viridis)  # For color palette
+
 
 # Define the factors
 prompt_type <- c('generation', 'knowledge', 'real')
@@ -112,82 +126,204 @@ boxplot(df_linux_generation_chatgpt$power)
 qqnorm(df_linux_generation_chatgpt$power)
 qqline(df_linux_generation_chatgpt$power, col = "red")
 
-# Boxplot: Linux-Generation
-boxplot(list(df_linux_generation_chatgpt$power, 
-            df_linux_generation_bard$power,
-            df_linux_generation_llama$power), 
-        main="Linux-Generation", names=c("ChatGPT", "Bard", "Llama2"),
-        ylab="Power"
-        )
-# TODO: Linux has a admin right problem about saving image through png()
-# save the image as png
-png("figures/linux-generation-boxplot.jpeg")
+# Linux-Generation
+# Create a new data frame with a grouping variable
+combined_data <- bind_rows(
+  df_linux_generation_chatgpt %>% mutate(Dataset = "ChatGPT"),
+  df_linux_generation_bard %>% mutate(Dataset = "Bard"),
+  df_linux_generation_llama %>% mutate(Dataset = "Llama2")
+)
+
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Dataset, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "Linux-Generation", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+# Save the plot as a PNG file
+ggsave("visualization/linux-generation-boxplot.png", width = 8, height = 6, units = "in")
+
 
 # Linux-Knowledge
-boxplot(list(df_linux_knowledge_chatgpt$power, 
-             df_linux_knowledge_bard$power,
-             df_linux_knowledge_llama$power), 
-        main="Linux-Knowledge", names=c("ChatGPT", "Bard", "Llama2"),
-        ylab="Power")
-# Save image
-png("figures/linux-knowledge-boxplot.jpeg")
+# Create a new data frame with a grouping variable
+combined_data <- bind_rows(
+  df_linux_knowledge_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_linux_knowledge_bard %>% mutate(Chatbot = "Bard"),
+  df_linux_knowledge_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "Linux-Knowledge", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+
+# Save the boxplot as a PNG file
+ggsave("visualization/linux-knowledge-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
 
 # Linux-Real
-boxplot(list(df_linux_real_chatgpt$power, 
-             df_linux_real_bard$power,
-             df_linux_real_llama$power), 
-        main="Linux-Real", names=c("ChatGPT", "Bard", "Llama2"),
-        ylab="Power")
-# Save image
-png("figures/linux-real-boxplot.jpeg")
+# Create a new data frame with a grouping variable
+combined_data <- bind_rows(
+  df_linux_real_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_linux_real_bard %>% mutate(Chatbot = "Bard"),
+  df_linux_real_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "Linux-RealWorld", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+
+# Save the boxplot as a PNG file
+ggsave("visualization/linux-real-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
 
 # M2-Generation
-boxplot(list(df_m2_generation_chatgpt$power, 
-             df_m2_generation_bard$power,
-             df_m2_generation_llama$power), 
-        main="M2-Generation", names=c("ChatGPT", "Bard", "Llama2"),
-        ylab="Power")
-png("figures/m2-generation-boxplot.jpeg")
+# Create a new data frame with a grouping variable
+combined_data <- bind_rows(
+  df_m2_generation_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_m2_generation_bard %>% mutate(Chatbot = "Bard"),
+  df_m2_generation_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "M2-Generation", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+
+# Save the boxplot as a PNG file
+ggsave("visualization/m2-generation-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
+
 
 # M2-Knowledge
-boxplot(list(df_m2_knowledge_chatgpt$power, 
-             df_m2_knowledge_bard$power,
-             df_m2_knowledge_llama$power), 
-        main="M2-Knowledge", names=c("ChatGPT", "Bard", "Llama2"),
-        ylab="Power")
-png("figures/m2-knowledge-boxplot.jpeg")
+# Create a new data frame with a grouping variable
+combined_data <- bind_rows(
+  df_m2_knowledge_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_m2_knowledge_bard %>% mutate(Chatbot = "Bard"),
+  df_m2_knowledge_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "M2-Knowledge", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+
+# Save the boxplot as a PNG file
+ggsave("visualization/m2-knowledge-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
+
 
 # M2-Real
-boxplot(list(df_m2_real_chatgpt$power, 
-             df_m2_real_bard$power,
-             df_m2_real_llama$power), 
-        main="M2-Real", names=c("ChatGPT", "Bard", "Llama2"),
-        ylab="Power")
-png("figures/m2-real-boxplot.jpeg")
+# Create a new data frame with a grouping variable
+combined_data <- bind_rows(
+  df_m2_real_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_m2_real_bard %>% mutate(Chatbot = "Bard"),
+  df_m2_real_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "M2-RealWorld", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+
+# Save the boxplot as a PNG file
+ggsave("visualization/m2-real-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
 
 # Windows-Generation
-boxplot(list(df_windows_generation_chatgpt$power, 
-             df_windows_generation_bard$power,
-             df_windows_generation_llama$power), 
-        main="Windows-Generation", names=c("ChatGPT", "Bard", "Llama2"),
-        ylab="Power")
-png("figures/windows-generation-boxplot.jpeg")
+combined_data <- bind_rows(
+  df_windows_generation_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_windows_generation_bard %>% mutate(Chatbot = "Bard"),
+  df_windows_generation_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "Windows-Generation", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+
+# Save the boxplot as a PNG file
+ggsave("visualization/windows-generation-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
+
 
 # Windows-Knowledge
-boxplot(list(df_windows_knowledge_chatgpt$power, 
-             df_windows_knowledge_bard$power,
-             df_windows_knowledge_llama$power), 
-        main="Windows-Knowledge", names=c("ChatGPT", "Bard", "Llama2"),
-        ylab="Power")
-png("figures/windows-knowledge-boxplot.jpeg")
+combined_data <- bind_rows(
+  df_windows_knowledge_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_windows_knowledge_bard %>% mutate(Chatbot = "Bard"),
+  df_windows_knowledge_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "Windows-Knowledge", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+
+# Save the boxplot as a PNG file
+ggsave("visualization/windows-knowledge-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
+
 
 # Windows-Real
+combined_data <- bind_rows(
+  df_windows_real_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_windows_real_bard %>% mutate(Chatbot = "Bard"),
+  df_windows_real_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "Windows-RealWorld", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
 boxplot(list(df_windows_real_chatgpt$power, 
              df_windows_real_bard$power,
              df_windows_real_llama$power), 
         main="Windows-Real", names=c("ChatGPT", "Bard", "Llama2"),
         ylab="Power")
-png("figures/windows-real-boxplot.jpeg")
+ggsave("visualization/windows-real-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
 
 
 
