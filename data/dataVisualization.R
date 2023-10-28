@@ -23,52 +23,49 @@ prompt_type <- c('generation', 'knowledge', 'real')
 machine <- c('linux', 'm2', 'm1', 'windows')
 llm <- c('chatgpt', 'bard', 'llama2')
 
-# Function processes data
-process_data <- function(filename, machine, promptType, llm) {
+# Function processes data: CPU Utilization
+process_data_cpu <- function(filename, machine, promptType, llm) {
   load(filename)
-  sample <- counter_data$sampleGroups[[1]]$samples
-  colnames(sample)[colnames(sample) == "count"] <- "powerUsage"
-  
+
   # calling data.frame to collapse the time and count vectors.
   df <- data.frame(
-    time = sample$time,
-    power = sample$powerUsage,
-    machine = factor(rep(machine, nrow(sample))),
-    promptType = factor(rep(promptType, nrow(sample))),
-    llm = factor(rep(llm, nrow(sample)))
+    power = new_data_df$cpu.usage,
+    machine = factor(rep(machine, nrow(new_data_df))),
+    promptType = factor(rep(promptType, nrow(new_data_df))),
+    llm = factor(rep(llm, nrow(new_data_df)))
   )
-  colnames(df) = c('time', 'power', 'machine', 'prompt', 'llm')
+  colnames(df) = c('power', 'machine', 'prompt', 'llm')
   return(df)
 }
 
 # Load and process the data
-df_linux_generation_chatgpt <- process_data("chatgpt/linux-generation-chatgpt.RData", 'linux', 'generation', 'chatgpt')
-df_linux_knowledge_chatgpt <- process_data("chatgpt/linux-knowledge-chatgpt.RData", 'linux', 'knowledge', 'chatgpt')
-df_linux_real_chatgpt <- process_data("chatgpt/linux-real-chatgpt.RData", 'linux', 'real', 'chatgpt')
-df_linux_generation_bard <- process_data("bard/linux-generation-bard.RData", 'linux', 'generation', 'bard')
-df_linux_knowledge_bard <- process_data("bard/linux-knowledge-bard.RData", 'linux', 'knowledge', 'bard')
-df_linux_real_bard <- process_data("bard/linux-real-bard.RData", 'linux', 'real', 'bard')
-df_linux_generation_llama <- process_data("llama/linux-generation-llama.RData", 'linux', 'generation', 'llama')
-df_linux_knowledge_llama <- process_data("llama/linux-knowledge-llama.RData", 'linux', 'knowledge', 'llama')
-df_linux_real_llama <- process_data("llama/linux-real-llama.RData", 'linux', 'real', 'llama')
-df_m2_generation_chatgpt <- process_data("chatgpt/m2-generation-chatGPT.RData", 'm2', 'generation', 'chatgpt')
-df_m2_knowledge_chatgpt <- process_data("chatgpt/m2-knowledge-chatGPT.RData", 'm2', 'knowledge', 'chatgpt')
-df_m2_real_chatgpt <- process_data("chatgpt/m2-realWorld-chatGPT.RData", 'm2', 'real', 'chatgpt')
-df_m2_generation_bard <- process_data("bard/m2-generation-bard.RData", 'm2', 'generation', 'bard')
-df_m2_knowledge_bard <- process_data("bard/m2-knowledge-bard.RData", 'm2', 'knowledge', 'bard')
-df_m2_real_bard <- process_data("bard/m2-realWorld-bard.RData", 'm2', 'real', 'bard')
-df_m2_generation_llama <- process_data("llama/m2-generation-llama2.RData", 'm2', 'generation', 'llama')
-df_m2_knowledge_llama <- process_data("llama/m2-knowledge-llama2.RData", 'm2', 'knowledge', 'llama')
-df_m2_real_llama <- process_data("llama/m2-realworld-llama2.RData", 'm2', 'real', 'llama')
-df_windows_generation_chatgpt <- process_data("chatgpt/windows11-generation-chatgpt.RData", 'windows', 'generation', 'chatgpt')
-df_windows_knowledge_chatgpt <- process_data("chatgpt/windows11-knowledge-chatgpt.RData", 'windows', 'knowledge', 'chatgpt')
-df_windows_real_chatgpt <- process_data("chatgpt/windows11-real-chatgpt.RData", 'windows', 'real', 'chatgpt')
-df_windows_generation_bard <- process_data("bard/windows11-generation-bard.RData", 'windows', 'generation', 'bard')
-df_windows_knowledge_bard <- process_data("bard/windows11-knowledge-bard.RData", 'windows', 'knowledge', 'bard')
-df_windows_real_bard <- process_data("bard/windows11-real-bard.RData", 'windows', 'real', 'bard')
-df_windows_generation_llama <- process_data("llama/windows11-generation-llama.RData", 'windows', 'generation', 'llama')
-df_windows_knowledge_llama <- process_data("llama/windows11-knowledge-llama.RData", 'windows', 'knowledge', 'llama')
-df_windows_real_llama <- process_data("llama/windows11-real-llama.RData", 'windows', 'real', 'llama')
+df_linux_generation_chatgpt <- process_data_cpu("formatted-data/RData/linux-generation-chatgpt.Rdata", 'linux', 'generation', 'chatgpt')
+df_linux_knowledge_chatgpt <- process_data_cpu("formatted-data/RData/linux-knowledge-chatgpt.Rdata", 'linux', 'knowledge', 'chatgpt')
+df_linux_real_chatgpt <- process_data_cpu("formatted-data/RData/linux-realworld-chatgpt.Rdata", 'linux', 'real', 'chatgpt')
+df_linux_generation_bard <- process_data_cpu("formatted-data/RData/linux-generation-bard.Rdata", 'linux', 'generation', 'bard')
+df_linux_knowledge_bard <- process_data_cpu("formatted-data/RData/linux-knowledge-bard.Rdata", 'linux', 'knowledge', 'bard')
+df_linux_real_bard <- process_data_cpu("formatted-data/RData/linux-realworld-bard.Rdata", 'linux', 'real', 'bard')
+df_linux_generation_llama <- process_data_cpu("formatted-data/RData/linux-generation-llama.Rdata", 'linux', 'generation', 'llama')
+df_linux_knowledge_llama <- process_data_cpu("formatted-data/RData/linux-knowledge-llama.Rdata", 'linux', 'knowledge', 'llama')
+df_linux_real_llama <- process_data_cpu("formatted-data/RData/linux-realworld-llama.Rdata", 'linux', 'real', 'llama')
+df_m2_generation_chatgpt <- process_data_cpu("formatted-data/RData/m2-generation-chatgpt.Rdata", 'm2', 'generation', 'chatgpt')
+df_m2_knowledge_chatgpt <- process_data_cpu("formatted-data/RData/m2-knowledge-chatgpt.Rdata", 'm2', 'knowledge', 'chatgpt')
+df_m2_real_chatgpt <- process_data_cpu("formatted-data/RData/m2-realworld-chatgpt.Rdata", 'm2', 'real', 'chatgpt')
+df_m2_generation_bard <- process_data_cpu("formatted-data/RData/m2-generation-bard.Rdata", 'm2', 'generation', 'bard')
+df_m2_knowledge_bard <- process_data_cpu("formatted-data/RData/m2-knowledge-bard.Rdata", 'm2', 'knowledge', 'bard')
+df_m2_real_bard <- process_data_cpu("formatted-data/RData/m2-realworld-bard.Rdata", 'm2', 'real', 'bard')
+df_m2_generation_llama <- process_data_cpu("formatted-data/RData/m2-generation-llama.Rdata", 'm2', 'generation', 'llama')
+df_m2_knowledge_llama <- process_data_cpu("formatted-data/RData/m2-knowledge-llama.Rdata", 'm2', 'knowledge', 'llama')
+df_m2_real_llama <- process_data_cpu("formatted-data/RData/m2-realworld-llama.Rdata", 'm2', 'real', 'llama')
+df_windows_generation_chatgpt <- process_data_cpu("formatted-data/RData/windows11-generation-chatgpt.Rdata", 'windows', 'generation', 'chatgpt')
+df_windows_knowledge_chatgpt <- process_data_cpu("formatted-data/RData/windows11-knowledge-chatgpt.Rdata", 'windows', 'knowledge', 'chatgpt')
+df_windows_real_chatgpt <- process_data_cpu("formatted-data/RData/windows11-realworld-chatgpt.Rdata", 'windows', 'real', 'chatgpt')
+df_windows_generation_bard <- process_data_cpu("formatted-data/RData/windows11-generation-bard.Rdata", 'windows', 'generation', 'bard')
+df_windows_knowledge_bard <- process_data_cpu("formatted-data/RData/windows11-knowledge-bard.Rdata", 'windows', 'knowledge', 'bard')
+df_windows_real_bard <- process_data_cpu("formatted-data/RData/windows11-realworld-bard.Rdata", 'windows', 'real', 'bard')
+df_windows_generation_llama <- process_data_cpu("formatted-data/RData/windows11-generation-llama.Rdata", 'windows', 'generation', 'llama')
+df_windows_knowledge_llama <- process_data_cpu("formatted-data/RData/windows11-knowledge-llama.Rdata", 'windows', 'knowledge', 'llama')
+df_windows_real_llama <- process_data_cpu("formatted-data/RData/windows11-realworld-llama.Rdata", 'windows', 'real', 'llama')
 
 df_m1_generation_chatgpt <- process_data("chatgpt/m1-generation-chatgpt.RData", 'm1', 'generation', 'chatgpt')
 df_m1_knowledge_chatgpt <- process_data("chatgpt/m1-knowledge-chatgpt.RData", 'm1', 'knowledge', 'chatgpt')
@@ -158,7 +155,7 @@ combined_data <- bind_rows(
 # Create a boxplot with grouping
 ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
-  labs(title = "Linux-Generation", y = "Power") +
+  labs(title = "Linux-Generation CPU Utilization", y = "Power") +
   theme_minimal() +
   theme(legend.position = "none")  # Hide the legend
 
@@ -177,7 +174,7 @@ combined_data <- bind_rows(
 # Create a boxplot with grouping
 ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
-  labs(title = "Linux-Knowledge", y = "Power") +
+  labs(title = "Linux-Knowledge CPU Utilization", y = "Power") +
   theme_minimal() +
   theme(legend.position = "none")  # Hide the legend
 
@@ -199,7 +196,7 @@ combined_data <- bind_rows(
 # Create a boxplot with grouping
 ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
-  labs(title = "Linux-RealWorld", y = "Power") +
+  labs(title = "Linux-RealWorld CPU Utilization", y = "Power") +
   theme_minimal() +
   theme(legend.position = "none")  # Hide the legend
 
@@ -221,7 +218,7 @@ combined_data <- bind_rows(
 # Create a boxplot with grouping
 ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
-  labs(title = "M2-Generation", y = "Power") +
+  labs(title = "M2-Generation CPU Utilization", y = "Power") +
   theme_minimal() +
   theme(legend.position = "none")  # Hide the legend
 
@@ -244,7 +241,7 @@ combined_data <- bind_rows(
 # Create a boxplot with grouping
 ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
-  labs(title = "M2-Knowledge", y = "Power") +
+  labs(title = "M2-Knowledge CPU Utilization", y = "Power") +
   theme_minimal() +
   theme(legend.position = "none")  # Hide the legend
 
@@ -267,7 +264,7 @@ combined_data <- bind_rows(
 # Create a boxplot with grouping
 ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
-  labs(title = "M2-RealWorld", y = "Power") +
+  labs(title = "M2-RealWorld CPU Utilization", y = "Power") +
   theme_minimal() +
   theme(legend.position = "none")  # Hide the legend
 
@@ -288,7 +285,7 @@ combined_data <- bind_rows(
 # Create a boxplot with grouping
 ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
-  labs(title = "Windows-Generation", y = "Power") +
+  labs(title = "Windows-Generation CPU Utilization", y = "Power") +
   theme_minimal() +
   theme(legend.position = "none")  # Hide the legend
 
@@ -310,7 +307,7 @@ combined_data <- bind_rows(
 # Create a boxplot with grouping
 ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
-  labs(title = "Windows-Knowledge", y = "Power") +
+  labs(title = "Windows-Knowledge CPU Utilization", y = "Power") +
   theme_minimal() +
   theme(legend.position = "none")  # Hide the legend
 
@@ -332,7 +329,7 @@ combined_data <- bind_rows(
 # Create a boxplot with grouping
 ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
-  labs(title = "Windows-RealWorld", y = "Power") +
+  labs(title = "Windows-RealWorld CPU Utilization", y = "Power") +
   theme_minimal() +
   theme(legend.position = "none")  # Hide the legend
 boxplot(list(df_windows_real_chatgpt$power, 
@@ -356,7 +353,7 @@ combined_data <- bind_rows(
 # Create a boxplot with grouping
 ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
-  labs(title = "M1-Generation", y = "Power") +
+  labs(title = "M1-Generation CPU Utilization", y = "Power") +
   theme_minimal() +
   theme(legend.position = "none")  # Hide the legend
 
