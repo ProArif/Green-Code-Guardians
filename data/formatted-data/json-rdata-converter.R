@@ -9,7 +9,9 @@ for (m in machines) {
     for (t in tasks) {
       fname = paste0(m,'-',t,'-',l,'-formated')
       json_path = paste0('json/',m,'/',fname,'.json')
-      rdata_path = paste0('RData/',fname,'.Rdata')
+      
+      rdata_fname = paste0(m,'-',t,'-',l)
+      rdata_path = paste0('RData/',rdata_fname,'.Rdata')
       
       new_data <- fromJSON(json_path)
       new_data_df <- as.data.frame(new_data) 
