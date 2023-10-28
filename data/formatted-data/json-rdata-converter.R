@@ -14,6 +14,9 @@ for (m in machines) {
       new_data <- fromJSON(json_path)
       new_data_df <- as.data.frame(new_data) 
       save(new_data_df, file = rdata_path)
+      
+      rm(new_data)
+      rm(new_data_df)
     }
   }
 }
