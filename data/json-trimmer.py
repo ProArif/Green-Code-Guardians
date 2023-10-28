@@ -43,8 +43,8 @@ def format_data(data):
         "cpu usage": cpu_usage
     }
 
-# change machine and llm
-machine = 'm2'
+# change machine and llsm
+machine = 'windows'
 llm = ['bard','chatgpt','llama']
 tasks = ['generation','knowledge','realworld']
 
