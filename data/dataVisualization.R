@@ -38,7 +38,7 @@ process_data_cpu <- function(filename, machine, promptType, llm) {
   return(df)
 }
 
-# Load and process the data
+# Load and process CPU Utilization data
 df_linux_generation_chatgpt <- process_data_cpu("formatted-data/RData/linux-generation-chatgpt.Rdata", 'linux', 'generation', 'chatgpt')
 df_linux_knowledge_chatgpt <- process_data_cpu("formatted-data/RData/linux-knowledge-chatgpt.Rdata", 'linux', 'knowledge', 'chatgpt')
 df_linux_real_chatgpt <- process_data_cpu("formatted-data/RData/linux-realworld-chatgpt.Rdata", 'linux', 'real', 'chatgpt')
@@ -140,6 +140,7 @@ remove_outliers <- function(df) {
   return(df_filtered)
 }
 
+# CPU Utilization
 df_linux_generation_chatgpt <- remove_outliers(df_linux_generation_chatgpt)
 df_linux_knowledge_chatgpt <- remove_outliers(df_linux_knowledge_chatgpt)
 df_linux_real_chatgpt <- remove_outliers(df_linux_real_chatgpt)
@@ -177,6 +178,34 @@ df_m1_generation_llama <- remove_outliers(df_m1_generation_llama)
 df_m1_knowledge_llama <- remove_outliers(df_m1_knowledge_llama)
 df_m1_real_llama <- remove_outliers(df_m1_real_llama)
 
+# Power Utilization
+power_df_m1_generation_bard <- remove_outliers(power_power_df_m1_generation_bard)
+power_df_m2_knowledge_chatgpt <- remove_outliers(power_df_m2_knowledge_chatgpt)
+power_df_m2_real_chatgpt <- remove_outliers(power_df_m2_real_chatgpt)
+power_df_m2_generation_bard <- remove_outliers(power_df_m2_generation_bard)
+power_df_m2_knowledge_bard <- remove_outliers(power_df_m2_knowledge_bard)
+power_df_m2_real_bard <- remove_outliers(power_df_m2_real_bard)
+power_df_m2_generation_llama <- remove_outliers(power_df_m2_generation_llama)
+power_df_m2_knowledge_llama <- remove_outliers(power_df_m2_knowledge_llama)
+power_df_m2_real_llama <- remove_outliers(power_df_m2_real_llama)
+power_df_windows_gneration_chatgpt <- remove_outliers(power_df_windows_generation_chatgpt)
+power_df_windows_knowledge_chatgpt <- remove_outliers(power_df_windows_knowledge_chatgpt)
+power_df_windows_real_chatgpt <- remove_outliers(power_df_windows_real_chatgpt)
+power_df_windows_generation_bard <- remove_outliers(power_df_windows_generation_bard)
+power_df_windows_knowledge_bard <- remove_outliers(power_df_windows_knowledge_bard)
+power_df_windows_real_bard <- remove_outliers(power_df_windows_real_bard)
+power_df_windows_generation_llama <- remove_outliers(power_df_windows_generation_llama)
+power_df_windows_knowledge_llama <- remove_outliers(power_df_windows_knowledge_llama)
+power_df_windows_real_llama <- remove_outliers(power_df_windows_real_llama)
+power_df_m1_generation_chatgpt <- remove_outliers(power_df_m1_generation_chatgpt)
+power_df_m1_knowledge_chatgpt <- remove_outliers(power_df_m1_knowledge_chatgpt)
+power_df_m1_real_chatgpt <- remove_outliers(power_df_m1_real_chatgpt)
+power_df_m1_generation_bard <- remove_outliers(power_df_m1_generation_bard)
+power_df_m1_knowledge_bard <- remove_outliers(power_df_m1_knowledge_bard)
+power_df_m1_real_bard <- remove_outliers(power_df_m1_real_bard)
+power_df_m1_generation_llama <- remove_outliers(power_df_m1_generation_llama)
+power_df_m1_knowledge_llama <- remove_outliers(power_df_m1_knowledge_llama)
+power_df_m1_real_llama <- remove_outliers(power_df_m1_real_llama)
 
 hist(df_linux_generation_chatgpt$power, main="Histogram of Power Usage", xlab="Power Usage", ylab="Frequency", col="skyblue", border="black")
 boxplot(df_linux_generation_chatgpt$power)
@@ -644,13 +673,154 @@ ggsave("visualization/power-m1-real-boxplot.png", width = 8, height = 6, units =
 # Close the PNG device
 dev.off()
 
-# Scatterplot
-# take the average of all the dataframe powers
+# Scatterplot CPU Utilization
+# ggplot2 grouping:
+# Combine all dataframes into one
+combined_df <- bind_rows(
+  df_linux_generation_bard,
+  df_linux_generation_chatgpt,
+  df_linux_generation_llama,
+  df_linux_knowledge_bard,
+  df_linux_knowledge_chatgpt,
+  df_linux_knowledge_llama,
+  df_linux_real_bard,
+  df_linux_real_chatgpt,
+  df_linux_real_llama,
+  df_m2_generation_bard,
+  df_m2_generation_chatgpt,
+  df_m2_generation_llama,
+  df_m2_knowledge_bard,
+  df_m2_knowledge_chatgpt,
+  df_m2_knowledge_llama,
+  df_m2_real_bard,
+  df_m2_real_chatgpt,
+  df_m2_real_llama,
+  df_windows_generation_bard,
+  df_windows_generation_chatgpt,
+  df_windows_generation_llama,
+  df_windows_knowledge_bard,
+  df_windows_knowledge_chatgpt,
+  df_windows_knowledge_llama,
+  df_windows_real_bard,
+  df_windows_real_chatgpt,
+  df_windows_real_llama,
+  df_m1_generation_bard,
+  df_m1_generation_chatgpt,
+  df_m1_generation_llama,
+  df_m1_knowledge_bard,
+  df_m1_knowledge_chatgpt,
+  df_m1_knowledge_llama,
+  df_m1_real_bard,
+  df_m1_real_chatgpt,
+  df_m1_real_llama
+)
+
+# Calculate the average power for each llm factor and machine
+cpu_scatter_plot_all <- combined_df %>%
+  group_by(llm, machine) %>%
+  summarise(mean_power = mean(power, na.rm = TRUE))
+
 # plot the average power of LLM interaction per LLM by operating system.
-ggplot(df_linux_generation_chatgpt, aes(x = llm, y = power, label = llm)) +
-  geom_point(aes(color = llm), size = 3) +
-  geom_text(aes(label = llm), vjust = 1.5, hjust = 1.5) +
-  labs(title = "Average power of LLM interaction per LLM by operating system.",
-       x = "Machine Type",
-       y = "Power Usage (Watts)") +
+ggplot(cpu_scatter_plot_all, aes(x=llm, y=mean_power, color=machine)) +
+  geom_point(size=3) +                                
+  labs(title="Scatterplot of CPU Utilization of LLMs vs. Mean Power",     
+       x="LLM",                                       
+       y="Mean Power",                                
+       color="Machine") +                             
   theme_minimal()
+
+# save the scatterplot
+ggsave("visualization/scatter-cpu-all.png", width = 8, height = 6, units = "in")
+dev.off()
+
+# Grouping only on Apple machines
+apple_scatter <- cpu_scatter_plot_all %>% filter(machine %in% c("m1", "m2"))
+
+# Plotting the filtered data
+ggplot(apple_scatter, aes(x=llm, y=mean_power, color=machine)) +
+  geom_point(size=3) +
+  labs(title="Scatterplot of CPU Utilization Llm vs. Mean Power (M1 and M2)",
+       x="Chatbot",
+       y="Mean Power",
+       color="Machine") +
+  theme_minimal()
+ggsave("visualization/scatter-cpu-apple.png", width = 8, height = 6, units = "in")
+dev.off()
+
+# Grouping only on Apple machines
+apple_scatter <- cpu_scatter_plot_all %>% filter(machine %in% c("m1", "m2"))
+
+# Plotting the filtered data
+ggplot(apple_scatter, aes(x=llm, y=mean_power, color=machine)) +
+  geom_point(size=3) +
+  labs(title="Scatterplot of CPU Utilization Llm vs. Mean Power (M1 and M2)",
+       x="Chatbot",
+       y="Mean Power",
+       color="Machine") +
+  theme_minimal()
+ggsave("visualization/scatter-cpu-apple.png", width = 8, height = 6, units = "in")
+dev.off()
+
+# Scatterplot of power utilization
+combined_power_df <- bind_rows(
+  power_df_m2_generation_bard,
+  power_df_m2_generation_chatgpt,
+  power_df_m2_generation_llama,
+  power_df_m2_knowledge_bard,
+  power_df_m2_knowledge_chatgpt,
+  power_df_m2_knowledge_llama,
+  power_df_m2_real_bard,
+  power_df_m2_real_chatgpt,
+  power_df_m2_real_llama,
+  power_df_windows_generation_bard,
+  power_df_windows_generation_chatgpt,
+  power_df_windows_generation_llama,
+  power_df_windows_knowledge_bard,
+  power_df_windows_knowledge_chatgpt,
+  power_df_windows_knowledge_llama,
+  power_df_windows_real_bard,
+  power_df_windows_real_chatgpt,
+  power_df_windows_real_llama,
+  power_df_m1_generation_bard,
+  power_df_m1_generation_chatgpt,
+  power_df_m1_generation_llama,
+  power_df_m1_knowledge_bard,
+  power_df_m1_knowledge_chatgpt,
+  power_df_m1_knowledge_llama,
+  power_df_m1_real_bard,
+  power_df_m1_real_chatgpt,
+  power_df_m1_real_llama
+)
+
+# grouping
+power_scatter_plot_all <- combined_power_df %>%
+  group_by(llm, machine) %>%
+  summarise(mean_power = mean(power, na.rm = TRUE))
+
+# plot the average power of LLM interaction per LLM by operating system.
+ggplot(power_scatter_plot_all, aes(x=llm, y=mean_power, color=machine)) +
+  geom_point(size=3) +                                
+  labs(title="Scatterplot of Power Utilization of LLMs vs. Mean Power",     
+       x="LLM",                                       
+       y="Mean Power",                                
+       color="Machine") +                             
+  theme_minimal()
+
+# save the scatterplot
+ggsave("visualization/scatter-power-all.png", width = 8, height = 6, units = "in")
+dev.off()
+
+# Grouping only on Apple machines
+apple_power_scatter <- power_scatter_plot_all %>% filter(machine %in% c("m1", "m2"))
+
+# Plotting the filtered data
+ggplot(apple_power_scatter, aes(x=llm, y=mean_power, color=machine)) +
+  geom_point(size=3) +
+  labs(title="Scatterplot of CPU Utilization Llm vs. Mean Power (M1 and M2)",
+       x="Chatbot",
+       y="Mean Power",
+       color="Machine") +
+  theme_minimal()
+ggsave("visualization/scatter-power-apple.png", width = 8, height = 6, units = "in")
+dev.off()
+
