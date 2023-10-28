@@ -70,6 +70,16 @@ df_windows_generation_llama <- process_data("llama/windows11-generation-llama.RD
 df_windows_knowledge_llama <- process_data("llama/windows11-knowledge-llama.RData", 'windows', 'knowledge', 'llama')
 df_windows_real_llama <- process_data("llama/windows11-real-llama.RData", 'windows', 'real', 'llama')
 
+df_m1_generation_chatgpt <- process_data("chatgpt/m1-generation-chatgpt.RData", 'm1', 'generation', 'chatgpt')
+df_m1_knowledge_chatgpt <- process_data("chatgpt/m1-knowledge-chatgpt.RData", 'm1', 'knowledge', 'chatgpt')
+df_m1_real_chatgpt <- process_data("chatgpt/m1-realworld-chatgpt.RData", 'm1', 'real', 'chatgpt')
+df_m1_generation_bard <- process_data("bard/m1-generation-bard.RData", 'm1', 'generation', 'bard')
+df_m1_knowledge_bard <- process_data("bard/m1-knowledge-bard.RData", 'm1', 'knowledge', 'bard')
+df_m1_real_bard <- process_data("bard/m1-realworld-bard.RData", 'm1', 'real', 'bard')
+df_m1_generation_llama <- process_data("llama/m1-generation-llama.RData", 'm1', 'generation', 'llama')
+df_m1_knowledge_llama <- process_data("llama/m1-knowledge-llama.RData", 'm1', 'knowledge', 'llama')
+df_m1_real_llama <- process_data("llama/m1-realworld-llama.RData", 'm1', 'real', 'llama')
+
 # Summary statistics
 summary(df_linux_generation_chatgpt$power)
 
@@ -118,6 +128,16 @@ df_windows_generation_llama <- remove_outliers(df_windows_generation_llama)
 df_windows_knowledge_llama <- remove_outliers(df_windows_knowledge_llama)
 df_windows_real_llama <- remove_outliers(df_windows_real_llama)
 
+df_m1_generation_chatgpt <- remove_outliers(df_m1_generation_chatgpt)
+df_m1_knowledge_chatgpt <- remove_outliers(df_m1_knowledge_chatgpt)
+df_m1_real_chatgpt <- remove_outliers(df_m1_real_chatgpt)
+df_m1_generation_bard <- remove_outliers(df_m1_generation_bard)
+df_m1_knowledge_bard <- remove_outliers(df_m1_knowledge_bard)
+df_m1_real_bard <- remove_outliers(df_m1_real_bard)
+df_m1_generation_llama <- remove_outliers(df_m1_generation_llama)
+df_m1_knowledge_llama <- remove_outliers(df_m1_knowledge_llama)
+df_m1_real_llama <- remove_outliers(df_m1_real_llama)
+
 
 hist(df_linux_generation_chatgpt$power, main="Histogram of Power Usage", xlab="Power Usage", ylab="Frequency", col="skyblue", border="black")
 boxplot(df_linux_generation_chatgpt$power)
@@ -129,14 +149,14 @@ qqline(df_linux_generation_chatgpt$power, col = "red")
 # Linux-Generation
 # Create a new data frame with a grouping variable
 combined_data <- bind_rows(
-  df_linux_generation_chatgpt %>% mutate(Dataset = "ChatGPT"),
-  df_linux_generation_bard %>% mutate(Dataset = "Bard"),
-  df_linux_generation_llama %>% mutate(Dataset = "Llama2")
+  df_linux_generation_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_linux_generation_bard %>% mutate(Chatbot = "Bard"),
+  df_linux_generation_llama %>% mutate(Chatbot = "Llama2")
 )
 
 
 # Create a boxplot with grouping
-ggplot(combined_data, aes(x = Dataset, y = power)) +
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
   geom_boxplot(fill = "gray") +  # Set fill color to grayscale
   labs(title = "Linux-Generation", y = "Power") +
   theme_minimal() +
@@ -321,6 +341,74 @@ boxplot(list(df_windows_real_chatgpt$power,
         main="Windows-Real", names=c("ChatGPT", "Bard", "Llama2"),
         ylab="Power")
 ggsave("visualization/windows-real-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
+
+# M1-Generation
+# Create a new data frame with a grouping variable
+combined_data <- bind_rows(
+  df_m1_generation_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_m1_generation_bard %>% mutate(Chatbot = "Bard"),
+  df_m1_generation_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "M1-Generation", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+
+# Save the boxplot as a PNG file
+ggsave("visualization/m1-generation-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
+
+
+# M1-Knowledge
+# Create a new data frame with a grouping variable
+combined_data <- bind_rows(
+  df_m1_knowledge_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_m1_knowledge_bard %>% mutate(Chatbot = "Bard"),
+  df_m1_knowledge_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "M1-Knowledge", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+
+# Save the boxplot as a PNG file
+ggsave("visualization/m1-knowledge-boxplot.png", width = 8, height = 6, units = "in")
+
+# Close the PNG device
+dev.off()
+
+
+# M1-Real
+# Create a new data frame with a grouping variable
+combined_data <- bind_rows(
+  df_m1_real_chatgpt %>% mutate(Chatbot = "ChatGPT"),
+  df_m1_real_bard %>% mutate(Chatbot = "Bard"),
+  df_m1_real_llama %>% mutate(Chatbot = "Llama2")
+)
+
+# Create a boxplot with grouping
+ggplot(combined_data, aes(x = Chatbot, y = power)) +
+  geom_boxplot(fill = "gray") +  # Set fill color to grayscale
+  labs(title = "M1-RealWorld", y = "Power") +
+  theme_minimal() +
+  theme(legend.position = "none")  # Hide the legend
+
+
+# Save the boxplot as a PNG file
+ggsave("visualization/m1-real-boxplot.png", width = 8, height = 6, units = "in")
 
 # Close the PNG device
 dev.off()

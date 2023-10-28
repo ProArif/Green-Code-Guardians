@@ -43,7 +43,18 @@ file_paths <- c(
   "bard/windows11-real-bard.json",
   "llama/windows11-real-llama.json",
   "llama/windows11-generation-llama.json",
-  "llama/windows11-knowledge-llama.json" 
+  "llama/windows11-knowledge-llama.json",
+
+  # data from macOS M1
+  "chatgpt/m1-generation-chatgpt.json",
+  "chatgpt/m1-knowledge-chatgpt.json",
+  "chatgpt/m1-realworld-chatgpt.json",
+  "bard/m1-generation-bard.json",
+  "bard/m1-knowledge-bard.json",
+  "bard/m1-realworld-bard.json",
+  "llama/m1-generation-llama.json",
+  "llama/m1-knowledge-llama.json",
+  "llama/m1-realworld-llama.json"
 
 )
 
