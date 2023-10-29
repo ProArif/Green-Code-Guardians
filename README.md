@@ -1,6 +1,6 @@
 # Green-Code-Guardians
 
-This repository is for the code portion of Green Lab course from VU Amsterdam. The code portion includes the interaction script, the experiment configuration of experiment-runner, and the R data analysis.
+This repository is for the code portion of Green Lab course from VU Amsterdam. The code portion R scripts for data analysis.
 
 
 ### Normality testing
@@ -11,3 +11,9 @@ The First Research Question Hypothesis is tested inside of Power-Kruskal-Wallis-
 
 ### Power consumption in Watts
 If you want to check the power consumption of the experiment per machine per llm per task, you can run Power-usage-Watts.R script in the root directory.
+
+### Data Visualization
+To recreate the data visualizations go to ./data/dataVisualization.R. All the generated visuals are placed in ./data/visualization.
+
+### Interaction [Depreciated]
+Interaction script with Selenium and RunnerConfig file for experiment-runner.
