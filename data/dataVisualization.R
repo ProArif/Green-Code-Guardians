@@ -816,7 +816,7 @@ apple_power_scatter <- power_scatter_plot_all %>% filter(machine %in% c("m1", "m
 # Plotting the filtered data
 ggplot(apple_power_scatter, aes(x=llm, y=mean_power, color=machine)) +
   geom_point(size=3) +
-  labs(title="Scatterplot of CPU Utilization Llm vs. Mean Power (M1 and M2)",
+  labs(title="Scatterplot of Power Utilization Llm vs. Mean Power (M1 and M2)",
        x="Chatbot",
        y="Mean Power",
        color="Machine") +
@@ -846,7 +846,7 @@ apple_power_machine_scatter <- power_scatter_machine %>% filter(machine %in% c("
 # Plotting the filtered data
 ggplot(apple_power_machine_scatter, aes(x=machine, y=mean_power, color=prompt)) +
   geom_point(size=3) +
-  labs(title="Scatterplot of CPU Utilization for Task Interactions(M1 and M2)",
+  labs(title="Scatterplot of Power Utilization for Task Interactions(M1 and M2)",
        x="Machine",
        y="Mean Power",
        color="Task Interaction") +
