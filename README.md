@@ -1,6 +1,6 @@
 # Green-Code-Guardians
 
-This repository is for the code portion of Green Lab course from VU Amsterdam. The code portion R scripts for data analysis.
+This repository is for the code portion of Green Lab course from VU Amsterdam. The code portion R scripts for data analysis. Prompt.docs the prompts used for the three interactions types used in the experiment.
 
 
 ### Normality testing
